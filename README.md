@@ -19,7 +19,7 @@
 	
 ## Used technologies
 	* PHP - framework will not be used
-	* CSS - BOOSTRAP
+	* CSS - BOOTSTRAP
 	* DB - MriaDB
 	* Javascript - AJAX, jQuery
 	
