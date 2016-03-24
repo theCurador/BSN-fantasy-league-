@@ -18,9 +18,9 @@
 	* User can see a shedule of the Lithuanian Basketball League
 	
 ## Used technologies
-	* PHP - framework will not be used
+	* PHP - Laravel 5 framework
 	* CSS - BOOTSTRAP
-	* DB - MriaDB
+	* DB - MariaDB
 	* Javascript - AJAX, jQuery
 	
 	
