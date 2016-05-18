@@ -96,6 +96,9 @@
                             <li><a href="{!! url('blog/create') !!}">{{ trans('back/admin.add') }}</a></li>
                         </ul>
                     </li>
+                    <li >
+                        <a href="{!! url('calcscores') !!}"><span class="fa fa-fw fa-file-image-o"></span> {{ trans('back/admin.calcscores') }}</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

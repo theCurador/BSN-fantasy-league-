@@ -9,7 +9,7 @@ use App\Models\User;
 
 class CreateTeamTest extends TestCase
 {
-    protected $baseUrl = '';
+    protected $baseUrl = 'http://185.80.129.55';
 
      /**
          * Can see create team URL

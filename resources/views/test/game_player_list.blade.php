@@ -4,74 +4,47 @@
 <div class="container">
 	<div class="panel panel-default col-lg-7">
 		<div class="panel-body ">
-			<h4>Varžybų žaidėjų paraiška</h4>
-			<h3 class="custom-game-player-list-h3">Taškai: 500</h3>
-			<table class="table table-bordered">
+			<h4><b>„{{$team->team_name}}“</b> komandos varžybų žaidėjų paraiška</h4>
+			<h3 class="custom-game-player-list-h3">Taškai: {{$team->team_points}}</h3>
+			@if($isHaveGamePlayer->count() != 0)
+			<table class="table table-bordered table-responsive">
 				<tr>
 					<td>#</td>
 					<td>Žaidėjo vardas</td>
 					<td>Pozicija</td>
 					<td>Klubas</td>
 					<td>Taškai</td>
-					<td>Stratinio penketo žaidėjas</td>
+					<td>Startinio penketo žaidėjas</td>
 				</tr>
-				<tr>
-					<td>1</td>
-					<td>Vytautas Šulskis</td>
-					<td>Puolėjas</td>
-					<td>Vytautas</td>
-					<td>19.0</td>
-					<td>Taip</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>Karolis Guščikas</td>
-					<td>Puolėjas</td>
-					<td>Šiauliai</td>
-					<td>5.5</td>
-					<td>Ne</td>
-				</tr>
-				<tr>
-					<td>3</td>
-					<td>Daniel Ewing</td>
-					<td>Gynėjas</td>
-					<td>Neptūnas</td>
-					<td>11.4</td>
-					<td>Taip</td>
-				</tr>
+
+				@foreach ($userPlayers as $userPlayer)
+				<tr>					
+					@foreach ($match as $isMatch)									
+						@if($isMatch->match_player == 1 && $isMatch->id == $userPlayer->contract_id)
+							@foreach ($players->where('player_id', '=', $userPlayer->contract_id)->get() as $list)								
+								<td>{{$i++}}</td>
+								<td>{{$list->name}}</td>
+								<td>{{$list->position}}</td>								
+								<td>{{$club->where('club_id', $userPlayer->club_id)->select('club_name')->first()->club_name}}</td>
+								<td>0</td>
+								@if($isMatch->starting_five == 1)
+									<td>Taip</td>
+								@else
+									<td>Ne</td>
+								@endif					
+							@endforeach
+						@endif
+					@endforeach								
+				</tr>												
+				@endforeach					
 			</table>
+			@else
+			<h3>Jūsų varžybų paraiška tuščia</h3>
+			@endif
 		</div>
 		
 	</div>
-	<div class="col-lg-1"></div>
-	<div class="panel panel-default col-lg-4">
-		<div class="panel-body ">
-			<h4 class="text-center">Komandų rezultatai</h4>
-			<table class="table table-bordered">
-				<tr>
-					<td>Vieta</td>
-					<td>Komanda</td>
-					<td>Taškai</td>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>Kryžmantas</td>
-					<td>300</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>Suolas</td>
-					<td>200</td>
-				</tr>
-				<tr>
-					<td>3</td>
-					<td>Pelė</td>
-					<td>100</td>
-				</tr>
-			</table>
-		</div>
-		
-	</div>
+	@include('test.sidebarr.team_result')
 </div>
 
 @stop

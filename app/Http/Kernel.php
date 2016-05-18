@@ -44,7 +44,8 @@ class Kernel extends HttpKernel {
 		'admin' => \App\Http\Middleware\IsAdmin::class,
 		'redac' => \App\Http\Middleware\IsRedactor::class,
 		'ajax' => \App\Http\Middleware\IsAjax::class,
-        'haveTeam' => \App\Http\Middleware\HaveTeam::class
+        'haveTeam' => \App\Http\Middleware\HaveTeam::class,
+        'notHaveTeam' => \App\Http\Middleware\NotHaveTeam::class
 	];
 
 }

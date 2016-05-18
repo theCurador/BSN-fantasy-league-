@@ -49,7 +49,7 @@
 							<li><a href="/add_player_in_team">Pirkti žaidėjus</a></li>
 						</ul>
 					</li>
-					<li><a href="#">Taškai</a></li>
+					<li><a href="results">Rezultatai</a></li>
 					@endif
 					
 					

@@ -1,13 +1,71 @@
 @extends('test.template')
 
+@section('head')
+	<script>		
+		$(function() {
+/*
+			// Seen gestion
+			$(":checkbox[name='seen']").change(function() {     
+				$(this).parents('.panel').toggleClass('panel-warning').toggleClass('panel-default');
+				$(this).hide().parent().append('<i class="fa fa-refresh fa-spin"></i>');
+				var token = $('input[name="_token"]').val();
+				$.ajax({
+					url: 'commentseen/' + this.value,
+					type: 'PUT',
+					data: "seen=" + this.checked + "&_token=" + token
+				})
+				.done(function() {
+					$('.fa-spin').remove();
+					$('input[type="checkbox"]:hidden').show();
+				})
+				.fail(function() {
+					$('.fa-spin').remove();
+					var chk = $('input[type="checkbox"]:hidden');
+					chk.parents('.panel').toggleClass('panel-warning').toggleClass('panel-default');
+					chk.show().prop('checked', chk.is(':checked') ? null:'checked');
+					alert('{{ trans('back/comments.fail') }}');
+				});
+			});
+
+			
+
+		
+*/
+
+	// Seen gestion
+			$(":checkbox[name='match_player']").change(function() {  				
+				var token = $('input[name="_token"]').val();
+				$.ajax({
+					url: 'matchplayer/' + this.value,
+					type: 'PUT',
+					data: "checked=" + this.checked + "&_token=" + token
+				})
+				.done(function(){
+					
+				})
+				.fail(function(){
+					
+				});
+			});
+
+			
+
+		});
+
+
+	</script>
+
+@stop
+
 @section('content')
 
 <div class="container">
 	<div class="panel panel-default col-lg-7">
 		<div class="panel-body ">
-			<h4>Komandos žaidėjų paraiška</h4>
-			<h3 class="custom-game-player-list-h3">Taškai: 500</h3>
-			<form action="" method="" class="form-horizontal">
+			<h4><b>„{{$team->team_name}}“</b> komandos žaidėjų paraiška</h4>
+			<h3 class="custom-game-player-list-h3">Taškai: {{$team->team_points}}</h3>
+			
+			@if($userPlayers->count() != 0)	
 				<table class="table table-bordered table-responsive">
 					<tr>
 						<td></td>
@@ -19,71 +77,36 @@
 						<td>Taškai</td>
 						<td>Kaina</td>
 					</tr>
-					<tr>
-						<td><input type="checkbox" name="player_1"</td>					
-						<td>1</td>
-						<td>Vytautas Šulskis</td>
-						<td>Puolėjas</td>
-						<td>Vytautas</td>
-						<td>19.0</td>
-						<td>20</td>
-						<td>100</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox" name="player_1"</td>
-						<td>2</td>
-						<td>Karolis Guščikas</td>
-						<td>Puolėjas</td>
-						<td>Šiauliai</td>
-						<td>15</td>
-						<td>20</td>
-						<td>100</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox" name="player_1"</td>
-						<td>3</td>
-						<td>Daniel Ewing</td>
-						<td>Gynėjas</td>
-						<td>Neptūnas</td>
-						<td>11.4</td>
-						<td>20</td>
-						<td>100</td>
-					</tr>
-				</table>
-				<button type="submit" class="btn btn-default">Patvirtinti varžybų paraišką</button>
-			</form>
-		</div>
-		
-	</div>
-	<div class="col-lg-1"></div>
-	<div class="panel panel-default col-lg-4">
-		<div class="panel-body ">
-			<h4 class="text-center">Komandų rezultatai</h4>
-			<table class="table table-bordered">
-				<tr>
-					<td>Vieta</td>
-					<td>Komanda</td>
-					<td>Taškai</td>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>Kryžmantas</td>
-					<td>300</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>Suolas</td>
-					<td>200</td>
-				</tr>
-				<tr>
-					<td>3</td>
-					<td>Pelė</td>
-					<td>100</td>
-				</tr>
-			</table>
-		</div>
-		
-	</div>
-</div>
 
-@stop
+					@foreach ($userPlayers as $userPlayer)
+						<tr>
+							@foreach ($match as $isMatch)
+							@if($isMatch->id == $userPlayer->contract_id)
+							@foreach ($players->where('player_id', '=', $userPlayer->contract_id)->get() as $list)
+							<td><input type="checkbox" name="match_player" @if($isMatch->match_player == 1) checked @endif value="{{$list->player_id}}">
+								<input type="hidden" name="_token" value="{{ csrf_token() }}">
+							</td>
+							<td>{{$i++}}</td>
+							<td>{{$list->name}}</td>
+							<td>{{$list->position}}</td>							
+							<td>{{$club->where('club_id', $userPlayer->club_id)->select('club_name')->first()->club_name}}</td>
+							<td>{{$list->eff}}</td>
+							<td>0</td>
+							<td>{{$list->price}}</td>
+							@endforeach
+							@endif
+							@endforeach
+					@endforeach
+						</tr>
+				</table>
+				
+				@else
+				<h3>Jūs neturite žaidėjų.</h3>
+				@endif				
+			</div>
+
+		</div>
+		@include('test.sidebarr.team_result')
+	</div>
+
+	@stop

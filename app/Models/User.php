@@ -74,4 +74,32 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	    return $this->role->slug != 'user';
 	}
 
+	/**
+	 * One to One relation
+	 *
+	 * @return Illuminate\Database\Eloquent\Relations\hasOne
+	 */
+	public function team(){
+		return $this->hasOne('App\Team');
+	}
+
+	/**
+	 * One to Many relation
+	 *
+	 * @return Illuminate\Database\Eloquent\Relations\hasMany
+	 */
+	public function userContractsPlayers() 
+	{
+	  return $this->hasManyThrough('App\Contracts', 'App\UserPlayers', 'user_id', 'contract_id');
+	}
+
+	public function userPlayers() 
+	{
+	  return $this->hasMany('App\UserPlayers');
+	}
+
+	
+
+
+
 }

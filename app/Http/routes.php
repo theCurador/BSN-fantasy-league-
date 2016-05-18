@@ -23,6 +23,16 @@ Route::group(['middleware' => ['web']], function () {
 		'middleware' => 'redac'
 	]);
 
+	Route::get('calcscores', [
+		'uses' => 'ScoresController@index',
+		'middleware' => 'admin'
+	]);
+	Route::post('calcscores', [
+		'uses' => 'ScoresController@store',
+		 'middleware' => 'admin'
+	]);
+
+
 	
 
 	// Blog
@@ -64,7 +74,7 @@ Route::group(['middleware' => ['web']], function () {
 	// Authentication routes...
 	//Route::get('auth/login', 'Auth\AuthController@getLogin');
 	Route::get('auth/login', function(){
-		return view('test.login');
+		return view('test.login')->with('teamResults', App\Team::orderBy('team_points', 'desc')->take(10)->get())->with('j', $j=1);
 	});
 	Route::post('auth/login', 'Auth\AuthController@postLogin');
 	Route::get('auth/logout', 'Auth\AuthController@getLogout');
@@ -76,12 +86,12 @@ Route::group(['middleware' => ['web']], function () {
 	// Registration routes...
 	//Route::get('auth/register', 'Auth\AuthController@getRegister');
 	Route::get('auth/register', function(){
-		return view('test.register');
+		return view('test.register')->with('teamResults', App\Team::orderBy('team_points', 'desc')->take(10)->get())->with('j', $j=1);
 	});
 	Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 	// Password reset link request routes...
-	Route::get('password/email', 'Auth\PasswordController@getEmail');	
+	Route::get('password/email', 'Auth\PasswordController@getEmail');
 	Route::post('password/email', 'Auth\PasswordController@postEmail');
 
 	// Password reset routes...
@@ -94,24 +104,28 @@ Route::group(['middleware' => ['web']], function () {
 		return view('test.index');
 	});
 
-	Route::get('team_player_list', ['middleware' => 'auth', function(){
-		return view('test.team_player_list');
-	}]);
+	Route::get('team_player_list', ['uses' => 'TeamPlayerListController@index', 'middleware' => ['auth', 'notHaveTeam']]);
+	Route::put('matchplayer/{id}', 'TeamPlayerListController@updateMatchPlayer');
 
 	/*Route::get('create_team', function(){
 		return view('test.create_team');
 	});*/
 
-	Route::get('game_player_list', function(){
-		return view('test.game_player_list');
-	});
+	Route::get('game_player_list', ['uses' => 'GamePlayerListController@index', 'middleware' => ['auth', 'notHaveTeam']]);
 
-	Route::get('add_player_in_team', function(){
-		return view('test.add_player_in_team');
-	});
+	Route::get('add_player_in_team', ['uses' => 'AddPlayerInTeamController@index', 'middleware' => ['auth', 'notHaveTeam']]);
+	Route::post('/add_player_in_team', array(
+	    'as' => 'add_player_in_team.store',
+	    'uses' => 'AddPlayerInTeamController@store',
+	    'middleware' => 'auth'
+	) );
+	Route::get('filterPlayers', ['uses' => 'AddPlayerInTeamController@filterPlayers', 'middleware' => ['auth', 'notHaveTeam']]);
 
-	Route::get('create_team', ['uses' => 'CreateTeamController@index', 'middleware' => ['auth', 'haveTeam']]);
-	Route::post('create_team', ['uses' => 'CreateTeamController@store', 'middleware' => 'auth']);
+
+	Route::get('create_team', ['uses' => 'TeamController@index', 'middleware' => ['auth', 'haveTeam']]);
+	Route::post('create_team', ['uses' => 'TeamController@store', 'middleware' => 'auth']);
+
+	Route::get('results', ['uses' => 'ResultsController@index']);
 
 
 
