@@ -24,7 +24,7 @@
 							@foreach ($players->where('player_id', '=', $userPlayer->contract_id)->get() as $list)								
 								<td>{{$i++}}</td>
 								<td>{{$list->name}}</td>
-								<td>{{$list->position}}</td>								
+								<td>{{trans('front/site.'.$list->position)}}</td>								
 								<td>{{$club->where('club_id', $userPlayer->club_id)->select('club_name')->first()->club_name}}</td>
 								<td>0</td>
 								@if($isMatch->starting_five == 1)

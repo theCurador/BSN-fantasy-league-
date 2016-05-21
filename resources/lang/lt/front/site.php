@@ -11,5 +11,9 @@ return [
 	'connection' => 'Prisijungimas',
 	'administration' => 'Administration',
 	'redaction' => 'Redaction',
-	'logout' => 'Atsijungti'
+	'logout' => 'Atsijungti',
+	'guard' => 'Gynėjas',
+	'forward' => 'Puolėjas',
+	'center' => 'Centras'
+
 ];

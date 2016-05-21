@@ -31,6 +31,10 @@ Route::group(['middleware' => ['web']], function () {
 		'uses' => 'ScoresController@store',
 		 'middleware' => 'admin'
 	]);
+	Route::post('calcteamscores', [
+		'uses' => 'ScoresController@storeteamscores',
+		 'middleware' => 'admin'
+	]);
 
 
 	

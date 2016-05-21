@@ -37,7 +37,7 @@
 							
 							<td>{{$i++}}</td>
 							<td>{{$list->name}}</td>
-							<td>{{$list->position}}</td>
+							<td>{{trans('front/site.'.$list->position)}}</td>
 							<td>@foreach ($club->where('club_id', $userPlayer->club_id)->select('club_name')->get() as $clubName) {{$clubName->club_name}}@endforeach</td>
 							<td>{{$list->eff}}</td>
 							<td>{{$list->price}}</td>
@@ -100,7 +100,7 @@
 							{!! Form::close() !!}
 						</td>
 						<td>{{$listItem->name}}</td>
-						<td>{{$listItem->position}}</td>
+						<td>{{trans('front/site.'.$listItem->position)}}</td>
 						<td>{{$club->where('club_id', $contracts->where('player_id', $listItem->player_id)->select('club_id')->first()->club_id)->select('club_name')->first()->club_name}}</td>
 						<td>{{$listItem->eff}}</td>
 						<td>{{$listItem->price}}</td>
