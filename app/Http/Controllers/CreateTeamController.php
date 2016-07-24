@@ -15,7 +15,7 @@ class CreateTeamController extends Controller
 
 	public function index($error = null){
 		
-		return view('test.create_team', ['error' => $error]);
+		return view('front.create_team', ['error' => $error]);
 	}
 
 	public function store(Request $request){

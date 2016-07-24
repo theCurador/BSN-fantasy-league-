@@ -14,6 +14,7 @@ return [
 	'logout' => 'Atsijungti',
 	'guard' => 'Gynėjas',
 	'forward' => 'Puolėjas',
-	'center' => 'Centras'
+	'center' => 'Centras',
+	'noCredits' => 'Neturite pakankamai kreditų.'
 
 ];

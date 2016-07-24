@@ -35,7 +35,7 @@ return [
 	"digits"               => "The :attribute must be :digits digits.",
 	"digits_between"       => "The :attribute must be between :min and :max digits.",
 	"email"                => "The :attribute must be a valid email address.",
-	"filled"               => "The :attribute field is required.",
+	"filled"               => ":attribute laukelis yra privalomas.",
 	"exists"               => "The selected :attribute is invalid.",
 	"image"                => "The :attribute must be an image.",
 	"in"                   => "The selected :attribute is invalid.",
@@ -57,7 +57,7 @@ return [
 	"not_in"               => "The selected :attribute is invalid.",
 	"numeric"              => "The :attribute must be a number.",
 	"regex"                => "The :attribute format is invalid.",
-	"required"             => "The :attribute field is required.",
+	"required"             => ":attribute yra privalomas.",
 	"required_if"          => "The :attribute field is required when :other is :value.",
 	"required_with"        => "The :attribute field is required when :values is present.",
 	"required_with_all"    => "The :attribute field is required when :values is present.",
@@ -104,7 +104,8 @@ return [
 	*/
 
 	'attributes' => [
-		"log" => "Email or Password"
+		"log" => "E.paštas arba vartotojo vardas",
+		"password" => "Slaptažodis"
 	],
 
 ];

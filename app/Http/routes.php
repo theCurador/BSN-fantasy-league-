@@ -78,7 +78,7 @@ Route::group(['middleware' => ['web']], function () {
 	// Authentication routes...
 	//Route::get('auth/login', 'Auth\AuthController@getLogin');
 	Route::get('auth/login', function(){
-		return view('test.login')->with('teamResults', App\Team::orderBy('team_points', 'desc')->take(10)->get())->with('j', $j=1);
+		return view('front.login')->with('teamResults', App\Team::orderBy('team_points', 'desc')->take(10)->get())->with('j', $j=1);
 	});
 	Route::post('auth/login', 'Auth\AuthController@postLogin');
 	Route::get('auth/logout', 'Auth\AuthController@getLogout');
@@ -90,7 +90,7 @@ Route::group(['middleware' => ['web']], function () {
 	// Registration routes...
 	//Route::get('auth/register', 'Auth\AuthController@getRegister');
 	Route::get('auth/register', function(){
-		return view('test.register')->with('teamResults', App\Team::orderBy('team_points', 'desc')->take(10)->get())->with('j', $j=1);
+		return view('front.register')->with('teamResults', App\Team::orderBy('team_points', 'desc')->take(10)->get())->with('j', $j=1);
 	});
 	Route::post('auth/register', 'Auth\AuthController@postRegister');
 
@@ -103,10 +103,6 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('password/reset', 'Auth\PasswordController@postReset');
 
 
-	//TEST
-	Route::get('test', function(){
-		return view('test.index');
-	});
 
 	Route::get('team_player_list', ['uses' => 'TeamPlayerListController@index', 'middleware' => ['auth', 'notHaveTeam']]);
 	Route::put('matchplayer/{id}', 'TeamPlayerListController@updateMatchPlayer');

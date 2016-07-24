@@ -47,7 +47,7 @@ class AddPlayerInTeamController extends Controller
 
 
 
-		return view('test.add_player_in_team')
+		return view('front.add_player_in_team')
 		->with('userCredits', $credits)
 		->with('teamPoints', $request->user()->team->team_points)
 		->with('userPlayers', $userPlayers)
@@ -69,7 +69,7 @@ class AddPlayerInTeamController extends Controller
 		if($userPlayers->where('user_id', $request->user()->id)->where('id', $playerContractId)->first()){
 			//išvesti klaida kai perka jau turima žaidėja
 		}elseif($request->user()->credits - Players::where('player_id', $request->player_id)->select('price')->first()->price <= 0){
-			return 'Nėr babkiu';
+			$error = "noCredits";
 		}else{
 			User::where('id', $request->user()->id)
 			->update(['credits' => $request->user()->credits - Players::where('player_id', $request->player_id)->select('price')->first()->price]);
@@ -79,7 +79,7 @@ class AddPlayerInTeamController extends Controller
 			$userPlayers->save();
 		}
 		//return new RedirectResponse(url('add_player_in_team'));
-		return redirect()->back();
+		return redirect()->back()->with('error', trans('front/site.'.$error));
 	}
 
 	public function filterPlayers(Request $request)

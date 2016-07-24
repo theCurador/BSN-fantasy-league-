@@ -28,7 +28,7 @@ class HomeController extends Controller
 
 
 
-		return view('test.index')
+		return view('front.index')
 		->with('teamResults', $teamResults)
 		->with('j', $j=1)
 		->with('matches', $match)		;

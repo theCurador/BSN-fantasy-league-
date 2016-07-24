@@ -20,7 +20,7 @@ class TeamPlayerListController extends Controller
 		$match = $request->user()->userPlayers;
 		$teamResults = Team::orderBy('team_points', 'desc')->take(10)->get();
 		
-		return view('test.team_player_list')
+		return view('front.team_player_list')
 			->with('userPlayers', $userPlayers)
 			->with('players', $players)
 			->with('club', $club)

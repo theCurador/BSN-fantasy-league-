@@ -15,7 +15,7 @@ class TeamController extends Controller
 
 	public function index($error = null){
 		$teamResults = Team::orderBy('team_points', 'desc')->take(10)->get();
-		return view('test.create_team', ['error' => $error])
+		return view('front.create_team', ['error' => $error])
 			->with('teamResults', $teamResults)
 			->with('j', $j=1);
 	}
