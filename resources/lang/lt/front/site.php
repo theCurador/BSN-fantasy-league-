@@ -15,6 +15,8 @@ return [
 	'guard' => 'Gynėjas',
 	'forward' => 'Puolėjas',
 	'center' => 'Centras',
-	'noCredits' => 'Neturite pakankamai kreditų.'
+	'noCredits' => 'Neturite pakankamai kreditų.',
+	'havePlayer' => 'Tokį žaidėją jau turite.',
+	'playerLimit' => 'Viršijote leistiną žaidėjų skaičių iš vienos komandos.'
 
 ];

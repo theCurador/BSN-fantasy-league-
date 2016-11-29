@@ -14,6 +14,7 @@ use App\Players;
 use App\Club;
 use App\Contracts;
 use App\Models\User;
+use App\Config;
 
 class AddPlayerInTeamController extends Controller
 {
@@ -40,11 +41,12 @@ class AddPlayerInTeamController extends Controller
 			->where('position', $request->position)
 			->paginate(10);
 		}
-
+		
 		$testas = $players
 			->join('fantasy_contracts', 'fantasy_players.player_id', '=', 'fantasy_contracts.player_id')
 			->join('fantasy_club', 'fantasy_contracts.club_id', '=', 'fantasy_club.club_id')->where('club_short_name', 'SIA');
 
+		
 
 
 		return view('front.add_player_in_team')
@@ -65,9 +67,22 @@ class AddPlayerInTeamController extends Controller
 	public function store(Request $request){
 		$userPlayers = new UserPlayers;
 		//$team->where('team_name', $request->team_name)->first()->contract_id;
+
 		$playerContractId = Contracts::where('player_id', $request->player_id)->select('contract_id')->first()->contract_id;
+		$playerClubId = Contracts::where('player_id', $request->player_id)->select('club_id')->first()->club_id;
+
+		$countPlayers = $userPlayers
+			->join('fantasy_contracts', 'fantasy_user_players.id', '=', 'fantasy_contracts.player_id')
+			->join('fantasy_club', 'fantasy_contracts.club_id', '=', 'fantasy_club.club_id')
+			->where('user_id', $request->user()->id)
+			->where('fantasy_club.club_id', $playerClubId)->count();
+		$config = Config::select()->first();
+
+		
 		if($userPlayers->where('user_id', $request->user()->id)->where('id', $playerContractId)->first()){
-			//išvesti klaida kai perka jau turima žaidėja
+			$error = "havePlayer";
+		}elseif(!($countPlayers < $config->same_team_player)){
+			$error = "playerLimit";
 		}elseif($request->user()->credits - Players::where('player_id', $request->player_id)->select('price')->first()->price <= 0){
 			$error = "noCredits";
 		}else{
@@ -77,6 +92,7 @@ class AddPlayerInTeamController extends Controller
 			$userPlayers->user_id = $request->user()->id;
 			$userPlayers->id = $playerContractId;
 			$userPlayers->save();
+			return redirect()->back();
 		}
 		//return new RedirectResponse(url('add_player_in_team'));
 		return redirect()->back()->with('error', trans('front/site.'.$error));

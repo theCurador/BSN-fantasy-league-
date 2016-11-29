@@ -127,6 +127,7 @@ Route::group(['middleware' => ['web']], function () {
 
 	Route::get('results', ['uses' => 'ResultsController@index']);
 
+	Route::get('teaminfo/{name}', ['uses' => 'ViewTeamInfoController@index', 'middleware' => 'auth']);
 
 
 

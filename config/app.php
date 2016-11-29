@@ -39,7 +39,7 @@ return [
 	|
 	*/
 
-	'url' => 'http://oldfantasy.elvinask.lt',
+	'url' => 'http://fantasytest.elvinask.lt',
 
 	/*
 	|--------------------------------------------------------------------------

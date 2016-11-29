@@ -72,6 +72,7 @@
 							]) !!}	
 
 							<div class="row">
+								<meta name="csrf-token" content="{{ csrf_token() }}" />
 
 								{!! Form::control('text', 12 , 'log', $errors, trans('front/login.log')) !!}
 								{!! Form::control('password', 12, 'password', $errors, trans('front/login.password')) !!}

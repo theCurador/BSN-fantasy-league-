@@ -19,7 +19,7 @@ class GamePlayerListController extends Controller
 		$players = new Players;
 		$club = new Club;
 		$match = $request->user()->userPlayers;
-		$isHaveGamePlayer = $request->user()->userPlayers->where('match_player', 1);
+		$isHaveGamePlayer = $request->user()->userPlayers->where('match_player', '1');
 		$teamResults = Team::orderBy('team_points', 'desc')->take(10)->get();
 
 		

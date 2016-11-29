@@ -13,7 +13,7 @@
     <h3>Įkelti varžybų taškus</h3>   
     
     {!!Form::open(['url' => 'calcscores', 'method' => 'post', 'role' => 'form', 'class' => 'navbar-form navbar-left', 'files' => true]) !!}
-    @if ($error != '')
+    @if (isset($error))
     <small class="help-block">{{ $error }}</small>
     @endif
     {!!Form::text('match_id', null, ['class' => 'form-control custom-input-create-team', 'placeholder' => 'Varžybų ID'])!!}
@@ -21,6 +21,8 @@
     {!!Form::submit('Įkelti varžybų taškus')!!}
     {!!Form::close()!!} 
    
+
+
   </div>
 
 

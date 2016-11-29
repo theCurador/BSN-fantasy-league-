@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Requests\ScoresRequest;
 use Maatwebsite\Excel\Files\ExcelFile;
 use App\Players;
 use App\UserPlayers;
@@ -20,10 +21,31 @@ class ScoresController extends Controller
 	public function index(Request $request){
 
 		return view('back.scores.index')
-		->with('error', '')
 		->with('qq', '');
 	}
 
+	public function store(ScoresRequest $request){
+		if ($request->hasFile('csv')){
+			if ($request->file('csv')->isValid()){
+        		if(Input::file('csv')->getClientOriginalExtension() == "csv"){
+        			$destinationPath = '/var/www/html/BasketballFantasyLeague/storage/app/scores'; // upload path
+		      		$fileName = $request->input('match_id').'.csv'; // renameing image
+		      		Input::file('csv')->move($destinationPath, $fileName); // uploading file to given path
+		      		return view('back.scores.index')->with('error', trans('back/scores.uploaded'));
+
+// id match_id contract_id points
+        		}else{
+        			return view('back.scores.index')->with('error', trans('back/scores.badFileFormat'));
+        		}
+			}else{
+				return view('back.scores.index')->with('error', trans('back/scores.error'));
+			}
+		}else{
+			return view('back.scores.index')->with('error', trans('back/scores.fileNotFound'));
+		}
+	}
+
+/*
 	public function store(Request $request){
 		if (Input::file('csv')->isValid()) {
 		      $destinationPath = '/var/www/laravel/storage/app/scores'; // upload path
@@ -62,7 +84,7 @@ class ScoresController extends Controller
 		  ->with('path2', $request->input('match_id'))
 		  ->with('qq', '') ;
 		}		
-
+*/
 		public function storeteamscores(Request $request){		
 
 			$teams = new Team;
@@ -88,20 +110,20 @@ class ScoresController extends Controller
 			foreach ($teamsInfo as $teamPlayer) {
 				$fantasyScores = new FantasyScores;
 				if($teamPlayer->match_player == 1 && !$fantasyScores->where('match_id', $teamPlayer->match_id)->where('contract_id', $teamPlayer->contract_id)->first()){				
-				$fantasyScores->team_id = $teamPlayer->team_id;
-				$fantasyScores->match_id = $teamPlayer->match_id;
-				$fantasyScores->contract_id = $teamPlayer->contract_id;
-				$fantasyScores->points = $teamPlayer->points;
-				$fantasyScores->save();
+					$fantasyScores->team_id = $teamPlayer->team_id;
+					$fantasyScores->match_id = $teamPlayer->match_id;
+					$fantasyScores->contract_id = $teamPlayer->contract_id;
+					$fantasyScores->points = $teamPlayer->points;
+					$fantasyScores->save();
 
 				//$teamPoints[$teamPlayer->team_id] += $teamPlayer->points;
-				foreach ($teamPoints as $teamPoint => $value) {
-					if ($teamPoints[$teamPoint]['team_id'] == $teamPlayer->team_id) {
-						$teamPoints[$teamPoint]['points'] += $teamPlayer->points;
+					foreach ($teamPoints as $teamPoint => $value) {
+						if ($teamPoints[$teamPoint]['team_id'] == $teamPlayer->team_id) {
+							$teamPoints[$teamPoint]['points'] += $teamPlayer->points;
+						}
 					}
 				}
 			}
-		}
 
 		/*foreach ($teamPoints as $teamPoint => $value) {
 			$teamPoints[$teamPoint]['points'] = $teamPoint['points'] + 10;			

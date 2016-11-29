@@ -42,7 +42,6 @@
 			<h3>Jūsų varžybų paraiška tuščia</h3>
 			@endif
 		</div>
-
 		
 	</div>
 	@include('front.sidebarr.team_result')

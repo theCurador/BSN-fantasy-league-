@@ -81,20 +81,20 @@
 					@foreach ($userPlayers as $userPlayer)
 						<tr>
 							@foreach ($match as $isMatch)
-							@if($isMatch->id == $userPlayer->contract_id)
-							@foreach ($players->where('player_id', '=', $userPlayer->contract_id)->get() as $list)
-							<td><input type="checkbox" name="match_player" @if($isMatch->match_player == 1) checked @endif value="{{$list->player_id}}">
-								<input type="hidden" name="_token" value="{{ csrf_token() }}">
-							</td>
-							<td>{{$i++}}</td>
-							<td>{{$list->name}}</td>
-							<td>{{trans('front/site.'.$list->position)}}</td>							
-							<td>{{$club->where('club_id', $userPlayer->club_id)->select('club_name')->first()->club_name}}</td>
-							<td>{{$list->eff}}</td>
-							<td>0</td>
-							<td>{{$list->price}}</td>
-							@endforeach
-							@endif
+								@if($isMatch->id == $userPlayer->contract_id)
+									@foreach ($players->where('player_id', '=', $userPlayer->contract_id)->get() as $list)
+										<td><input type="checkbox" name="match_player" @if($isMatch->match_player == 1) checked @endif value="{{$list->player_id}}">
+											<input type="hidden" name="_token" value="{{ csrf_token() }}">
+										</td>
+										<td>{{$i++}}</td>
+										<td>{{$list->name}}</td>
+										<td>{{trans('front/site.'.$list->position)}}</td>							
+										<td>{{$club->where('club_id', $userPlayer->club_id)->select('club_name')->first()->club_name}}</td>
+										<td>{{$list->eff}}</td>
+										<td>0</td>
+										<td>{{$list->price}}</td>
+									@endforeach
+								@endif
 							@endforeach
 					@endforeach
 						</tr>

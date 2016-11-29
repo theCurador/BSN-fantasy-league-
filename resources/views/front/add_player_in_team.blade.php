@@ -12,9 +12,11 @@
 <div class="container">
 	<div class="panel panel-default">
 		<div class="panel-body">
+			
 			@if(session()->has('error'))
 			@include('partials/error', ['type' => 'danger', 'message' => session('error')])
-			@endif	
+			@endif
+
 			<div class="row">
 				<div class="col-md-6"><h3>Žaidėjų sąrašas</h3></div>
 				<div class="col-md-6"><h3>Taškai: {{$teamPoints}}</h3></div>
