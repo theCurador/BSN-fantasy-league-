@@ -1,5 +1,5 @@
-##BasketballFantasyLeague##
-###User story###
+## BasketballFantasyLeague ##
+### User story ###
 
 * User need register to game
 * User can login in game
@@ -17,7 +17,7 @@
 * User can see scoring hisotry
 * User can see a shedule of the Lithuanian Basketball League
 
-###Used technologies###
+### Used technologies ###
 
 * PHP - Laravel 5 framework
 * CSS - BOOTSTRAP
