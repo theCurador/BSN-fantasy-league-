@@ -24,10 +24,14 @@ The problem in Puerto Rico sports is focused around  **DATA** .
        - **10%** of the league players do not have weight and height displayed [EXHIBIT A]
        - **42** players have no city to claim  and **6** of them are ageless. [EXHIBIT A]
        - **1** Unlucky player has no official poition as the oficial team position is ***"IDK"*** [EXHIBIT A]
+         - the positions column suffers a blow when cleaning data. currently data is presented in 2 different tables. 
+         original team Roster with *"basic"* information. the other table has all the players that participated with the team during the season. 
+         some teams have more players on one table than the other. 
    - Lack of standarized information
 
 
-- The data is not processed live, and in some instance is the stats are not submitted up to 24 hours later. 
+
+- The data is not processed live, and in some instances the stats are submitted up to 24 hours later. 
 - The clean up of the data does not exist
 - There should be someone finding new ways or cleaners ways to process the data. 
 ---
@@ -63,4 +67,14 @@ One app simplified that allows cerified officials to ceritify via the app or web
 
 ---
 # TO BE CONTINUED
+
+an answer to the way data is presented,and eliminating the double jeopardy on players info 
+is by creating a expandable roster.
+the ## header ## containing team data  (team analysis, insert power bi dashboard idea)
+the table content is the players, numbers, position, eff rate. so on and so on.
+but when clicking a player it expands to show his basic info and a way to present more information(anything related to the player)
+(insert image or websequence of concept)
+
+Every USER must have a User ID  
+(provide reasons for the userid)
 
