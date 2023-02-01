@@ -25,7 +25,7 @@
 
 ### Setup Django Server
 
-1. ### **Be sure you are in the** *distika\distika* **directory**
+1. ### **Be sure you are in the** *distika* **directory**
 
 1. Run a sanity check that Django is installed correctly
 
