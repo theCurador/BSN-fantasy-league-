@@ -60,8 +60,13 @@
 
     `python manage.py migrate`
 
-1. Build admin login
+1. **OPTIONAL** Build admin login
 
+    Current configuration is :
+    * name: **distika**
+    * email address: **distika@distika.com**
+    * password: **distika**
+ 
     `python manage.py createsuperuser`
 
     You will receive prompts for:
