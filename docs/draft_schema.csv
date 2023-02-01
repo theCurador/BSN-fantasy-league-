@@ -1,0 +1,46 @@
+﻿Phase 01
+===========
+Coaches
+        CoachesOnteams
+Country
+    Sport
+        SportsInCountry
+Season
+    Game
+League
+        LeagueinSport
+    LeagueType
+    Team
+        TeamInLeague
+Player
+    PlayerGame
+        PlayerGameStats
+        PlayersOnTeams
+
+
+Phase 02
+===========
+User
+PlayerStats
+Standing
+LeagueStanding
+TeamStats
+PlayerSeasonStats
+Accolades
+Badges
+Ad
+DeviceInfo
+Leaderboard
+Live
+News
+PlayerAcolades
+
+????
+========
+UserBadges
+UserBookmarks
+UserLeaderboards
+UserSchedule
+UserSettings
+UserShares
+Stats
